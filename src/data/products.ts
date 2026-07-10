@@ -19,8 +19,6 @@ export const products: Product[] = [
     size: "1 gallon",
     category: "Dairy",
     image: "🥛",
-    retailer: "Walmart",
-    price: 3.48,
     allPrices: [
       { retailer: "Walmart", price: 3.48 },
       { retailer: "Target", price: 3.79 },
@@ -35,8 +33,6 @@ export const products: Product[] = [
     size: "12 ct",
     category: "Dairy",
     image: "🥚",
-    retailer: "Kroger",
-    price: 2.99,
     allPrices: [
       { retailer: "Walmart", price: 3.24 },
       { retailer: "Target", price: 3.49 },
@@ -51,8 +47,6 @@ export const products: Product[] = [
     size: "per lb",
     category: "Produce",
     image: "🍌",
-    retailer: "Walmart",
-    price: 0.54,
     allPrices: [
       { retailer: "Walmart", price: 0.54 },
       { retailer: "Target", price: 0.59 },
@@ -66,8 +60,6 @@ export const products: Product[] = [
     size: "20 oz",
     category: "Bakery",
     image: "🍞",
-    retailer: "Target",
-    price: 2.49,
     allPrices: [
       { retailer: "Walmart", price: 2.78 },
       { retailer: "Target", price: 2.49 },
@@ -82,8 +74,6 @@ export const products: Product[] = [
     size: "per lb",
     category: "Meat",
     image: "🍗",
-    retailer: "Kroger",
-    price: 2.99,
     allPrices: [
       { retailer: "Walmart", price: 3.24 },
       { retailer: "Target", price: 3.49 },
@@ -98,8 +88,6 @@ export const products: Product[] = [
     size: "52 fl oz",
     category: "Beverages",
     image: "🍊",
-    retailer: "Publix",
-    price: 3.79,
     allPrices: [
       { retailer: "Walmart", price: 4.12 },
       { retailer: "Target", price: 4.29 },
@@ -113,8 +101,6 @@ export const products: Product[] = [
     size: "24 oz",
     category: "Pantry",
     image: "🍅",
-    retailer: "Walmart",
-    price: 1.98,
     allPrices: [
       { retailer: "Walmart", price: 1.98 },
       { retailer: "Target", price: 2.29 },
@@ -128,8 +114,6 @@ export const products: Product[] = [
     size: "8 oz block",
     category: "Dairy",
     image: "🧀",
-    retailer: "Kroger",
-    price: 2.79,
     allPrices: [
       { retailer: "Walmart", price: 3.12 },
       { retailer: "Target", price: 3.29 },
@@ -143,8 +127,6 @@ export const products: Product[] = [
     size: "12 oz bag",
     category: "Frozen",
     image: "🥦",
-    retailer: "Walmart",
-    price: 1.48,
     allPrices: [
       { retailer: "Walmart", price: 1.48 },
       { retailer: "Target", price: 1.79 },
@@ -159,8 +141,6 @@ export const products: Product[] = [
     size: "1 lb",
     category: "Produce",
     image: "🍓",
-    retailer: "Target",
-    price: 3.49,
     allPrices: [
       { retailer: "Walmart", price: 3.88 },
       { retailer: "Target", price: 3.49 },
@@ -174,8 +154,6 @@ export const products: Product[] = [
     size: "16 oz",
     category: "Pantry",
     image: "🍝",
-    retailer: "Walmart",
-    price: 1.24,
     allPrices: [
       { retailer: "Walmart", price: 1.24 },
       { retailer: "Target", price: 1.49 },
@@ -189,8 +167,6 @@ export const products: Product[] = [
     size: "32 oz",
     category: "Dairy",
     image: "🫙",
-    retailer: "Publix",
-    price: 4.99,
     allPrices: [
       { retailer: "Walmart", price: 5.48 },
       { retailer: "Target", price: 5.29 },
@@ -204,8 +180,6 @@ export const products: Product[] = [
     size: "12 in",
     category: "Frozen",
     image: "🍕",
-    retailer: "Kroger",
-    price: 4.49,
     allPrices: [
       { retailer: "Walmart", price: 4.88 },
       { retailer: "Target", price: 4.99 },
@@ -219,8 +193,6 @@ export const products: Product[] = [
     size: "3 lb bag",
     category: "Produce",
     image: "🍎",
-    retailer: "Walmart",
-    price: 3.98,
     allPrices: [
       { retailer: "Walmart", price: 3.98 },
       { retailer: "Target", price: 4.29 },
@@ -234,8 +206,6 @@ export const products: Product[] = [
     size: "12-pack",
     category: "Beverages",
     image: "💧",
-    retailer: "Target",
-    price: 3.99,
     allPrices: [
       { retailer: "Walmart", price: 4.48 },
       { retailer: "Target", price: 3.99 },
@@ -249,8 +219,6 @@ export const products: Product[] = [
     size: "per lb",
     category: "Meat",
     image: "🥩",
-    retailer: "Walmart",
-    price: 4.98,
     allPrices: [
       { retailer: "Walmart", price: 4.98 },
       { retailer: "Target", price: 5.49 },
@@ -264,8 +232,6 @@ export const products: Product[] = [
     size: "24 oz",
     category: "Bakery",
     image: "🥖",
-    retailer: "Publix",
-    price: 3.99,
     allPrices: [
       { retailer: "Walmart", price: 4.28 },
       { retailer: "Target", price: 4.49 },
@@ -279,8 +245,6 @@ export const products: Product[] = [
     size: "16 oz",
     category: "Pantry",
     image: "🥜",
-    retailer: "Kroger",
-    price: 2.49,
     allPrices: [
       { retailer: "Walmart", price: 2.88 },
       { retailer: "Target", price: 2.99 },

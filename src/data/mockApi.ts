@@ -1,7 +1,10 @@
-import type { Product, SortOption } from "../types";
 import { products } from "./products";
+import { toDisplayProduct } from "./pricing";
+import type { DisplayProduct, Product, SortOption } from "../types";
 
-interface SearchParams {
+const NETWORK_DELAY_MS = 650;
+
+export interface SearchParams {
   query: string;
   retailerFilter: string[];
   sort: SortOption;
@@ -11,32 +14,23 @@ export function searchProducts({
   query,
   retailerFilter,
   sort,
-}: SearchParams): Promise<Product[]> {
+}: SearchParams): Promise<DisplayProduct[]> {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const normalized = query.trim().toLowerCase();
-
-      if (normalized === "error") {
-        reject(
-          new Error(
-            "Could not reach Prox servers. Check your connection and try again."
-          )
-        );
+      if (query.trim().toLowerCase() === "error") {
+        reject(new Error("Could not reach Prox servers. Check your connection and try again."));
         return;
       }
 
-      let results = products.filter((p) => {
-        const matchesQuery =
-          normalized === "" ||
-          p.name.toLowerCase().includes(normalized) ||
-          p.category.toLowerCase().includes(normalized);
+      const matchesQuery = (name: string, category: string) =>
+        query.trim()
+          ? name.toLowerCase().includes(query.trim().toLowerCase()) ||
+            category.toLowerCase().includes(query.trim().toLowerCase())
+          : true;
 
-        const matchesRetailer =
-          retailerFilter.length === 0 ||
-          retailerFilter.includes(p.retailer);
-
-        return matchesQuery && matchesRetailer;
-      });
+      let results = products
+        .filter((p) => matchesQuery(p.name, p.category))
+        .map((p) => toDisplayProduct(p, retailerFilter));
 
       if (sort === "price-asc") {
         results = [...results].sort((a, b) => a.price - b.price);
@@ -45,7 +39,7 @@ export function searchProducts({
       }
 
       resolve(results);
-    }, 650);
+    }, NETWORK_DELAY_MS);
   });
 }
 
@@ -53,6 +47,6 @@ export function fetchProductById(id: string): Promise<Product | undefined> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(products.find((p) => p.id === id));
-    }, 325);
+    }, NETWORK_DELAY_MS / 2);
   });
 }

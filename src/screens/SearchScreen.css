@@ -1,0 +1,29 @@
+@import "./Screen.css";
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+}
+
+.search-bar__icon {
+  font-size: 15px;
+  opacity: 0.6;
+}
+
+.search-bar__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14.5px;
+  color: var(--ink);
+}
+
+.search-bar__input::placeholder {
+  color: var(--ink-soft);
+}
