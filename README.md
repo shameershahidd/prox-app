@@ -52,7 +52,8 @@ the App Store and Play Store.
 src/
   types/          Product, DisplayProduct, RetailerPrice, SortOption
   data/
-    products.ts   Mock catalog: 18 items, each priced at all 4 retailers
+    products.ts   Mock catalog: 18 items, realistic per-item retailer
+                  availability (2-4 retailers each, not uniformly all 4)
     pricing.ts    toDisplayProduct() — turns a Product into a priced,
                   filter-aware DisplayProduct for list rendering
     mockApi.ts    searchProducts() / fetchProductById() — simulated
@@ -79,14 +80,32 @@ why saving/unsaving from either screen stays in sync automatically.
 
 ## UX & data-modeling decisions
 
-- **Every product is priced at every retailer, always.** Products don't 
-  "belong" to one retailer — `allPrices` holds all four prices for every 
-  item, and `toDisplayProduct()` computes which price to show based on the 
-  active retailer filter (or the cheapest price anywhere, with no filter 
-  active). I caught and fixed a bug during development where filtering by 
-  retailer was hiding products instead of repricing them, which would have 
-  quietly broken the entire point of a price-comparison app — filtering 
-  should never reduce your ability to compare, it should sharpen it.
+- **Search results show one row per (product, retailer) combination, not
+  one row per product.** Searching "milk" with no filter shows all 4
+  retailer listings for Whole Milk side by side, rather than collapsing to
+  a single "best" row — the comparison is visible directly in the list, not
+  hidden behind the detail screen. The retailer filter narrows which
+  listings appear rather than repricing a single row (an earlier version of
+  this app did the latter; I moved away from it once I realized collapsing
+  to one row per product was hiding the comparison the app exists to show).
+  A "Cheapest" tag flags whichever row has the globally lowest price for
+  that product — this stays meaningful even when filtered to one retailer:
+  if that retailer isn't actually the cheapest, no tag shows, which quietly
+  signals "you might do better elsewhere" without cluttering the list with
+  a competitor's price.
+- **Default sort is alphabetical by product name, not catalog order.**
+  Browsing without a search term or explicit price sort orders products A-Z,
+  which makes scanning predictable — you can guess roughly where an item
+  will land, the way a printed store flyer is organized. I considered
+  grouping by retailer instead (a "Walmart section," "Target section," etc.)
+  but rejected it: it would scatter a single product's retailer listings
+  across different parts of the list, defeating the point of showing them
+  together for comparison.
+- **Not every product is carried by every retailer.** Availability varies
+  per item (2-4 retailers), matching how grocery assortment actually works
+  — not every store stocks everything. A retailer filter can legitimately
+  return zero rows for an item that store doesn't carry; that's correct
+  behavior, not a bug.
 - **Debounced search (300ms)** so we're not firing a "network" request on 
   every keystroke, same as a real app would debounce before hitting a backend.
 - **Skeleton loading, not a spinner.** A skeleton that matches the card's 

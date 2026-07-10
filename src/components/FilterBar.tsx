@@ -39,7 +39,7 @@ export function FilterBar({
         onChange={(e) => onSortChange(e.target.value as SortOption)}
         aria-label="Sort by price"
       >
-        <option value="relevance">Sort: Relevance</option>
+        <option value="relevance">Sort: A–Z</option>
         <option value="price-asc">Price: Low to High</option>
         <option value="price-desc">Price: High to Low</option>
       </select>

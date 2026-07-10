@@ -6,10 +6,9 @@ interface ProductCardProps {
   product: DisplayProduct;
   isSaved: boolean;
   onToggleSave: (product: DisplayProduct) => void;
-  showBestBadge?: boolean;
 }
 
-export function ProductCard({ product, isSaved, onToggleSave, showBestBadge = false }: ProductCardProps) {
+export function ProductCard({ product, isSaved, onToggleSave }: ProductCardProps) {
   const cheapestOverall = Math.min(...product.allPrices.map((p) => p.price));
   const isCheapestHere = product.price === cheapestOverall;
 
@@ -29,7 +28,7 @@ export function ProductCard({ product, isSaved, onToggleSave, showBestBadge = fa
         </div>
         <div className="product-card__price-col">
           <span className="product-card__price">${product.price.toFixed(2)}</span>
-          {showBestBadge && isCheapestHere && <span className="product-card__best">Best price</span>}
+          {isCheapestHere && <span className="product-card__best">Cheapest</span>}
         </div>
       </Link>
       <button

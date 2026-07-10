@@ -1,19 +1,20 @@
-import type { Product, RetailerPrice, DisplayProduct } from "../types";
+import type { Product, DisplayProduct } from "../types";
 
 /**
- * Every product in the catalog is carried by all four retailers (allPrices
- * always has one entry per retailer) — that's what makes cross-retailer
- * comparison possible. So a retailer filter should REPRICE each product to
- * that retailer's price, not remove products that "belong" to a different
- * retailer. With no filter active, we show the cheapest price anywhere,
- * since surfacing the best deal is the whole point of the app.
+ * Turns a Product into one DisplayProduct per retailer (or per retailer in
+ * the active filter, if one is set). Every matching product can now appear
+ * multiple times in a results list — once per retailer carrying it — so the
+ * comparison is visible directly in the list instead of hidden behind the
+ * detail screen. Rows are returned cheapest-first within the product, purely
+ * for a nicer default (relevance) read; price-asc/price-desc sorting at the
+ * search layer overrides this ordering globally.
  */
-export function toDisplayProduct(product: Product, retailerFilter: string[] = []): DisplayProduct {
-  const candidates: RetailerPrice[] = retailerFilter.length
+export function toDisplayProducts(product: Product, retailerFilter: string[] = []): DisplayProduct[] {
+  const candidates = retailerFilter.length
     ? product.allPrices.filter((p) => retailerFilter.includes(p.retailer))
     : product.allPrices;
 
-  const cheapest = candidates.reduce((min, curr) => (curr.price < min.price ? curr : min), candidates[0]);
-
-  return { ...product, retailer: cheapest.retailer, price: cheapest.price };
+  return [...candidates]
+    .sort((a, b) => a.price - b.price)
+    .map((rp) => ({ ...product, retailer: rp.retailer, price: rp.price }));
 }

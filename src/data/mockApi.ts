@@ -1,5 +1,5 @@
 import { products } from "./products";
-import { toDisplayProduct } from "./pricing";
+import { toDisplayProducts } from "./pricing";
 import type { DisplayProduct, Product, SortOption } from "../types";
 
 const NETWORK_DELAY_MS = 650;
@@ -30,12 +30,18 @@ export function searchProducts({
 
       let results = products
         .filter((p) => matchesQuery(p.name, p.category))
-        .map((p) => toDisplayProduct(p, retailerFilter));
+        .flatMap((p) => toDisplayProducts(p, retailerFilter));
 
       if (sort === "price-asc") {
         results = [...results].sort((a, b) => a.price - b.price);
       } else if (sort === "price-desc") {
         results = [...results].sort((a, b) => b.price - a.price);
+      } else {
+        // Default (A-Z): sort alphabetically by product name. Array.sort is
+        // stable, so rows sharing the same name (same product, different
+        // retailers) stay grouped together in their existing cheapest-first
+        // order from toDisplayProducts() — only which product comes first changes.
+        results = [...results].sort((a, b) => a.name.localeCompare(b.name));
       }
 
       resolve(results);

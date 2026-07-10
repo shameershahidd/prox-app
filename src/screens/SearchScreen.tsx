@@ -94,11 +94,10 @@ export function SearchScreen() {
           <div className="product-list">
             {results.map((product) => (
               <ProductCard
-                key={product.id}
+                key={`${product.id}-${product.retailer}`}
                 product={product}
                 isSaved={isSaved(product.id, product.retailer)}
                 onToggleSave={(p) => toggleSaved(p.id, p.retailer, p.price)}
-                showBestBadge={retailerFilter.length > 0}
               />
             ))}
           </div>
